@@ -16,8 +16,7 @@ export function buildTree(array) {
 
 export class Tree {
   constructor(array) {
-    // TODO step 2
-    throw new Error("Not implemented: Tree constructor");
+    this.root = buildTree(array);
   }
 
   includes(value) {
