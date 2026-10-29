@@ -3,8 +3,9 @@
 
 export class Node {
   constructor(data) {
-    // TODO step 1
-    throw new Error("Not implemented: Node");
+    this.data = data;
+    this.left = null;
+    this.right = null;
   }
 }
 
