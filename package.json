@@ -1,0 +1,11 @@
+{
+  "name": "bst-top",
+  "version": "1.0.0",
+  "description": "Assignment Binary Search Trees — The Odin Project (balanced BST)",
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "driver": "bun driver.js"
+  }
+}
