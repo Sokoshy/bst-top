@@ -80,6 +80,13 @@ describe("step 2 — Tree (constructor + root)", () => {
     expect(tree.root.left).toBeNull();
     expect(tree.root.right).toBeNull();
   });
+
+  test("does not mutate the input array", () => {
+    const input = [3, 1, 2, 3, 1];
+    const snapshot = [...input];
+    new Tree(input);
+    expect(input).toEqual(snapshot);
+  });
 });
 
 // Step 3: buildTree
@@ -129,6 +136,13 @@ describe("step 3 — buildTree(array)", () => {
 
   test("buildTree([]) returns null", () => {
     expect(buildTree([])).toBeNull();
+  });
+
+  test("does not mutate the input array", () => {
+    const input = [5, 3, 5, 1, 3, 2];
+    const snapshot = [...input];
+    buildTree(input);
+    expect(input).toEqual(snapshot);
   });
 });
 

@@ -10,8 +10,32 @@ export class Node {
 }
 
 export function buildTree(array) {
-  // TODO step 3
-  throw new Error("Not implemented: buildTree");
+  if(array.length === 0) return null
+
+  const copyArr = [...array];
+  copyArr.sort((a, b) => a - b);
+
+  for (let i = 0; i < copyArr.length; i++) {
+    if (copyArr[i] === copyArr[i - 1]) {
+      copyArr.splice(i, 1);
+      i--;
+    }
+  }
+
+  function bstRecur(copyArr, start = 0, end = copyArr.length - 1) {
+    if (start > end) return null;
+
+    let mid = Math.floor(start + (end - start) / 2);
+    let root = new Node(copyArr[mid]);
+
+    root.left = bstRecur(copyArr, start, mid - 1);
+    root.right = bstRecur(copyArr, mid + 1, end);
+
+    return root;
+  }
+
+  const root = bstRecur(copyArr);
+  return root;
 }
 
 export class Tree {
