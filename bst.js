@@ -44,8 +44,21 @@ export class Tree {
   }
 
   includes(value) {
-    // TODO step 4
-    throw new Error("Not implemented: includes");
+    if(this.root === null || value === null){
+      return false;
+    }
+    let currNode = this.root;
+    while(true){
+      if(currNode.data === value){
+        return true
+      }else if(currNode.left !==null && currNode.data > value){
+        currNode =  currNode.left
+      }else if(currNode.right !==null && currNode.data < value){
+        currNode = currNode.right
+      }else{
+        return false;
+      }
+    }
   }
 
   insert(value) {
