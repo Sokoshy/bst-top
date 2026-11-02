@@ -50,11 +50,11 @@ export class Tree {
     let currNode = this.root;
     while(true){
       if(currNode.data === value){
-        return true
+        return true;
       }else if(currNode.left !==null && currNode.data > value){
-        currNode =  currNode.left
+        currNode =  currNode.left;
       }else if(currNode.right !==null && currNode.data < value){
-        currNode = currNode.right
+        currNode = currNode.right;
       }else{
         return false;
       }
@@ -62,8 +62,28 @@ export class Tree {
   }
 
   insert(value) {
-    // TODO step 5
-    throw new Error("Not implemented: insert");
+    if(this.root === null){
+      this.root = new Node(value);
+    }
+
+    let currNode = this.root;
+    while(true){
+      if(currNode.data === value){
+        return;
+      }else if(currNode.data > value){
+        if(currNode.left === null){
+          currNode.left = new Node(value);
+          return;
+        }
+        currNode =  currNode.left;
+      }else if(currNode.data < value){
+        if(currNode.right === null){
+          currNode.right = new Node(value);
+          return;
+        }
+        currNode = currNode.right;
+      }
+    }
   }
 
   deleteItem(value) {
