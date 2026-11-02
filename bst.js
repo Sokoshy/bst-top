@@ -125,8 +125,21 @@ export class Tree {
   }
 
   levelOrderForEach(callback) {
-    // TODO step 7
-    throw new Error("Not implemented: levelOrderForEach");
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required");
+    }
+    if(this.root === null) return;
+    
+    let queue = [this.root]
+    while (queue.length > 0) {
+      const node = queue.shift();   // je garde le nœud
+      callback(node.data);
+      if(node.left !== null){
+        queue.push(node.left);
+      }
+      if(node.right !== null){
+        queue.push(node.right);
+      }    }
   }
 
   inOrderForEach(callback) {
