@@ -87,8 +87,41 @@ export class Tree {
   }
 
   deleteItem(value) {
-    // TODO step 6
-    throw new Error("Not implemented: deleteItem");
+    function delNode(root, value){
+      if(root === null) return null;
+
+      if(root.data > value){
+        root.left = delNode(root.left, value);
+        return root;
+      }else if(root.data < value){
+        root.right = delNode(root.right, value);
+        return root;
+      }else {
+
+        if(root.left === null){
+          return root.right
+        }
+        if(root.right === null){
+          return root.left;
+        }
+
+        const succ = getSuccessor(root);
+        root.data = succ.data;
+        root.right = delNode(root.right, succ.data);
+
+        return root;
+      }
+    }
+
+    function getSuccessor(curr){
+      let node = curr.right;
+      while(node !== null && node.left !== null){
+        node = node.left;
+      }
+      return node;
+    }
+
+    this.root = delNode(this.root, value);
   }
 
   levelOrderForEach(callback) {
