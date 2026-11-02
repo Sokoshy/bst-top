@@ -10,7 +10,7 @@ export class Node {
 }
 
 export function buildTree(array) {
-  if(array.length === 0) return null
+  if (array.length === 0) return null;
 
   const copyArr = [...array];
   copyArr.sort((a, b) => a - b);
@@ -44,40 +44,40 @@ export class Tree {
   }
 
   includes(value) {
-    if(this.root === null || value === null){
+    if (this.root === null || value === null) {
       return false;
     }
     let currNode = this.root;
-    while(true){
-      if(currNode.data === value){
+    while (true) {
+      if (currNode.data === value) {
         return true;
-      }else if(currNode.left !==null && currNode.data > value){
-        currNode =  currNode.left;
-      }else if(currNode.right !==null && currNode.data < value){
+      } else if (currNode.left !== null && currNode.data > value) {
+        currNode = currNode.left;
+      } else if (currNode.right !== null && currNode.data < value) {
         currNode = currNode.right;
-      }else{
+      } else {
         return false;
       }
     }
   }
 
   insert(value) {
-    if(this.root === null){
+    if (this.root === null) {
       this.root = new Node(value);
     }
 
     let currNode = this.root;
-    while(true){
-      if(currNode.data === value){
+    while (true) {
+      if (currNode.data === value) {
         return;
-      }else if(currNode.data > value){
-        if(currNode.left === null){
+      } else if (currNode.data > value) {
+        if (currNode.left === null) {
           currNode.left = new Node(value);
           return;
         }
-        currNode =  currNode.left;
-      }else if(currNode.data < value){
-        if(currNode.right === null){
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        if (currNode.right === null) {
           currNode.right = new Node(value);
           return;
         }
@@ -87,21 +87,20 @@ export class Tree {
   }
 
   deleteItem(value) {
-    function delNode(root, value){
-      if(root === null) return null;
+    function delNode(root, value) {
+      if (root === null) return null;
 
-      if(root.data > value){
+      if (root.data > value) {
         root.left = delNode(root.left, value);
         return root;
-      }else if(root.data < value){
+      } else if (root.data < value) {
         root.right = delNode(root.right, value);
         return root;
-      }else {
-
-        if(root.left === null){
-          return root.right
+      } else {
+        if (root.left === null) {
+          return root.right;
         }
-        if(root.right === null){
+        if (root.right === null) {
           return root.left;
         }
 
@@ -113,9 +112,9 @@ export class Tree {
       }
     }
 
-    function getSuccessor(curr){
+    function getSuccessor(curr) {
       let node = curr.right;
-      while(node !== null && node.left !== null){
+      while (node !== null && node.left !== null) {
         node = node.left;
       }
       return node;
@@ -128,33 +127,70 @@ export class Tree {
     if (typeof callback !== "function") {
       throw new Error("A callback is required");
     }
-    if(this.root === null) return;
-    
-    let queue = [this.root]
+    if (this.root === null) return;
+
+    let queue = [this.root];
     while (queue.length > 0) {
-      const node = queue.shift();   // je garde le nœud
+      const node = queue.shift(); // je garde le nœud
       callback(node.data);
-      if(node.left !== null){
+      if (node.left !== null) {
         queue.push(node.left);
       }
-      if(node.right !== null){
+      if (node.right !== null) {
         queue.push(node.right);
-      }    }
+      }
+    }
   }
 
   inOrderForEach(callback) {
-    // TODO step 8
-    throw new Error("Not implemented: inOrderForEach");
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required");
+    }
+
+    if (this.root === null) return;
+
+    function visit(root) {
+      if (root === null) return;
+      visit(root.left);
+      callback(root.data);
+      visit(root.right);
+    }
+
+    let root = visit(this.root);
   }
 
   preOrderForEach(callback) {
-    // TODO step 8
-    throw new Error("Not implemented: preOrderForEach");
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required");
+    }
+
+    if (this.root === null) return;
+
+    function visit(root) {
+      if (root === null) return;
+      callback(root.data);
+      visit(root.left);
+      visit(root.right);
+    }
+
+    let root = visit(this.root);
   }
 
   postOrderForEach(callback) {
-    // TODO step 8
-    throw new Error("Not implemented: postOrderForEach");
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required");
+    }
+
+    if (this.root === null) return;
+
+    function visit(root) {
+      if (root === null) return;
+      visit(root.left);
+      visit(root.right);
+      callback(root.data);
+    }
+
+    let root = visit(this.root);
   }
 
   height(value) {
