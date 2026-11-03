@@ -194,8 +194,37 @@ export class Tree {
   }
 
   height(value) {
-    // TODO step 9
-    throw new Error("Not implemented: height");
+    function search(value, root) {
+      if (root === null || value === null) {
+        return undefined;
+      }
+      let currNode = root;
+      while (true) {
+        if (currNode.data === value) {
+          return currNode;
+        } else if (currNode.left !== null && currNode.data > value) {
+          currNode = currNode.left;
+        } else if (currNode.right !== null && currNode.data < value) {
+          currNode = currNode.right;
+        } else {
+          return undefined;
+        }
+      }
+    }
+
+    let node = search(value, this.root);
+
+    if (node === undefined) return undefined;
+
+    function calcHeight(node) {
+      if (node === null) {
+        return -1;
+      }
+
+      return 1 + Math.max(calcHeight(node.left), calcHeight(node.right));
+    }
+
+    return calcHeight(node);
   }
 
   depth(value) {
