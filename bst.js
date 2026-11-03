@@ -228,8 +228,24 @@ export class Tree {
   }
 
   depth(value) {
-    // TODO step 10
-    throw new Error("Not implemented: depth");
+    if (this.root === null || value === null) return undefined;
+
+    let depth = 0;
+
+    let currNode = this.root;
+    while (true) {
+      if (currNode.data === value) {
+        return depth;
+      } else if (currNode.left !== null && currNode.data > value) {
+        currNode = currNode.left;
+        depth++;
+      } else if (currNode.right !== null && currNode.data < value) {
+        currNode = currNode.right;
+        depth++;
+      } else {
+        return undefined;
+      }
+    }
   }
 
   isBalanced() {
