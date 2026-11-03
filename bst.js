@@ -249,8 +249,31 @@ export class Tree {
   }
 
   isBalanced() {
-    // TODO step 11
-    throw new Error("Not implemented: isBalanced");
+    if (this.root === null) return true;
+
+    let node = this.root;
+
+    function check(node) {
+      if (node === null) return true;
+      if (
+        calcHeight(node.left) - calcHeight(node.right) > 1 ||
+        calcHeight(node.right) - calcHeight(node.left) > 1
+      ) {
+        return false;
+      } else {
+        return check(node.left) && check(node.right);
+      }
+    }
+
+    function calcHeight(node) {
+      if (node === null) {
+        return -1;
+      }
+
+      return 1 + Math.max(calcHeight(node.left), calcHeight(node.right));
+    }
+
+    return check(node);
   }
 
   rebalance() {
