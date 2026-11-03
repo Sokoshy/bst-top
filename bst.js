@@ -277,8 +277,9 @@ export class Tree {
   }
 
   rebalance() {
-    // TODO step 12
-    throw new Error("Not implemented: rebalance");
+    const values = [];
+    this.inOrderForEach((v) => values.push(v));
+    this.root = buildTree(values);
   }
 }
 
